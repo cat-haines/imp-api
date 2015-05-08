@@ -1,0 +1,31 @@
+{
+  "name": "index.js",
+  "version": "0.1.0",
+  "description": "Javascript wrapper for the Electric Imp Developer Tools API",
+  "main": "imp.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/beardedinventor/imp.js.git"
+  },
+  "keywords": [
+    "electricimp",
+    "imp",
+    "iot",
+    "api"
+  ],
+  "author": "Matt Haines",
+  "license": "MIT",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "bugs": {
+    "url": "https://github.com/beardedinventor/imp.js/issues"
+  },
+  "homepage": "https://github.com/beardedinventor/imp.js",
+  "dependencies": {
+    "request": "^2.55.0"
+  },
+  "devDependencies": {
+    "jasmine": "^2.3.1"
+  }
+}
