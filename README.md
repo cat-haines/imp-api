@@ -24,7 +24,7 @@ var imp = new Imp({
 
 Returns a list of devices associted to the account. You can pass a table with any of the following options to filter the list: ```device_id```, ```mac_address```, ```model_id```, ```name```.
 
-```
+```javascript
 // get all devices with 'test' in the name
 imp.getDevices({ "name": "test", function(err, data) {
   if (err) {
@@ -43,7 +43,7 @@ imp.getDevices({ "name": "test", function(err, data) {
 
 Returns information about a specific device.
 
-```
+```javascript
 imp.getDevice("<-- device_id -->", function(err, data) {
   if(err) {
     console.log(err);
@@ -58,7 +58,7 @@ imp.getDevice("<-- device_id -->", function(err, data) {
 
 Assigns a device to a specific model, and immediatly starts running the code.
 
-```
+```javascript
 imp.assignDevice("<-- device_id -->", "<-- model_id -->", function(err, data) {
   if (err) {
     console.log(err);
@@ -75,7 +75,7 @@ Passing ```null``` as the modelId will unassign the device from it's current mod
 
 Deletes a device from your account (note: the next time the device comes online / communicates with the Electric Imp service it will re-register itself with your account).
 
-```
+```javascript
 imp.deleteDevice("<-- device_id -->", function(err, data) {
   if (err) {
     console.log(err);
@@ -90,7 +90,7 @@ imp.deleteDevice("<-- device_id -->", function(err, data) {
 
 Returns a list of models associted to the account. You can pass a table with any of the following options to filter the list: ```name```.
 
-```
+```javascript
 // get all models with 'test' in the name
 imp.getModels({ "name": "test", function(err, data) {
   if (err) {
@@ -108,7 +108,7 @@ imp.getModels({ "name": "test", function(err, data) {
 
 Returns information about a specific model.
 
-```
+```javascript
 imp.getModel("<-- model_id -->", function(err, data) {
   if(err) {
     console.log(err);
@@ -123,7 +123,7 @@ imp.getModel("<-- model_id -->", function(err, data) {
 
 Creates a new model in the associated account.
 
-```
+```javascript
 imp.createModel("New Model Name", function(err, data) {
   if(err) {
     console.log(err);
@@ -138,7 +138,7 @@ imp.createModel("New Model Name", function(err, data) {
 
 Restarts all devices and agents associated to a model.
 
-```
+```javascript
 imp.restartModel("<-- model_id -->", function(err, data) {
   if(err) {
     console.log(err);
@@ -153,7 +153,7 @@ imp.restartModel("<-- model_id -->", function(err, data) {
 
 Deletes the specified model and all code associated with it - you cannot delete a model that has devices assigned to it.
 
-```
+```javascript
 imp.deleteModel("<-- model_id -->", function(err, data) {
   if(err) {
     console.log(err);
@@ -168,9 +168,10 @@ imp.deleteModel("<-- model_id -->", function(err, data) {
 
 Returns a list of code revisions for the specified model. You can pass a table with any of the following options to filter the list: ```since```, ```until```, ```build_min```, ```build_max```.
 
-```
+```javascript
 // 1800000 milliseconds = 30 minutes
 var thirtyMinutesAgo = Date.now() - 1800000;
+
 imp.getModelRevisions("<-- model_id -->", { "since": thirtyMinutesAgo }, function(err, data) {
   if (err) {
     console.log(err);
@@ -187,7 +188,7 @@ imp.getModelRevisions("<-- model_id -->", { "since": thirtyMinutesAgo }, functio
 
 Returns the code and metadata of a specified version.
 
-```
+```javascript
 imp.getModelRevision("<-- model_id -->", versionNumber, function(err, data) {
   if (err) {
     console.log(err);
@@ -203,7 +204,7 @@ imp.getModelRevision("<-- model_id -->", versionNumber, function(err, data) {
 
 Pushes a new revision to the model. After creating a new revision, you need to call ```restartModel``` for the code to be sent to the devices assigned to the specified model. The model object **must** contain ```agent_code``` and ```device_code``` and can also include ```release_notes``` and ```marker``` (63 characters max that can be used like GIT tags).
 
-```
+```javascript
 var deviceCode = "server.log(\"Device Started!\");";
 var agentCode = "server.log(\"Agent Started!\");";
 
@@ -230,7 +231,7 @@ imp.createModelRevision("<-- model_id -->", model, function(err, data) {
 
 To run the full test suite, you will first need to create ```/spec/integration/test_params.json``` which should have the following content:
 
-```
+```javascript
 {
   "apiKey" : "<-- Your API Key -->",
   "invalidApiKey" : "abc123",
