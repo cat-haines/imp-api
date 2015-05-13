@@ -1,11 +1,11 @@
 {
-  "name": "imp.js",
+  "name": "imp-api",
   "version": "0.1.0",
   "description": "Javascript wrapper for the Electric Imp Developer Tools API",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/beardedinventor/imp.js.git"
+    "url": "https://github.com/beardedinventor/imp-api.git"
   },
   "keywords": [
     "electricimp",
@@ -22,9 +22,9 @@
     "test": "jasmine"
   },
   "bugs": {
-    "url": "https://github.com/beardedinventor/imp.js/issues"
+    "url": "https://github.com/beardedinventor/imp-api/issues"
   },
-  "homepage": "https://github.com/beardedinventor/imp.js",
+  "homepage": "https://github.com/beardedinventor/imp-api",
   "dependencies": {
     "request": "^2.55.0"
   },
