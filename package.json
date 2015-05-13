@@ -1,8 +1,8 @@
 {
-  "name": "index.js",
+  "name": "imp.js",
   "version": "0.1.0",
   "description": "Javascript wrapper for the Electric Imp Developer Tools API",
-  "main": "imp.js",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/beardedinventor/imp.js.git"
