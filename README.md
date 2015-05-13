@@ -5,7 +5,7 @@ A Javascript wrapper for [Electric Imp](http://electricimp.com)'s Developer Tool
 # Installation
 
 ```
-npm install imp.js
+npm install imp-api
 ```
 
 ## Instantation
