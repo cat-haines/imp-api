@@ -1,7 +1,6 @@
 var Imp = require("../../lib/imp");
 var settings = require("./test_params.json");
 
-
 describe("When a request with an invalid API Key is made", function() {
   var imp;
 
@@ -102,6 +101,50 @@ describe("When a request with an invalid API Key is made", function() {
   describe("to deleteModel", function() {
     it("it should return an error", function(done) {
       imp.deleteModel("123", function(err, data) {
+        expect(err).not.toBe(null);
+        expect(err.code).toBe("Unauthorized")
+
+        done();
+      });
+    });
+  });
+
+  describe("to restartModel", function() {
+    it("it should return an error", function(done) {
+      imp.restartModel("123", function(err, data) {
+        expect(err).not.toBe(null);
+        expect(err.code).toBe("Unauthorized")
+
+        done();
+      });
+    });
+  });
+
+  describe("to getModelRevisions", function() {
+    it("it should return an error", function(done) {
+      imp.getModelRevisions("123", null, function(err, data) {
+        expect(err).not.toBe(null);
+        expect(err.code).toBe("Unauthorized")
+
+        done();
+      });
+    });
+  });
+
+  describe("to getModelRevision", function() {
+    it("it should return an error", function(done) {
+      imp.getModelRevision("123", "123", function(err, data) {
+        expect(err).not.toBe(null);
+        expect(err.code).toBe("Unauthorized")
+
+        done();
+      });
+    });
+  });
+
+  describe("to createModelRevision", function() {
+    it("it should return an error", function(done) {
+      imp.createModelRevision("123", {}, function(err, data) {
         expect(err).not.toBe(null);
         expect(err.code).toBe("Unauthorized")
 
@@ -297,8 +340,6 @@ describe("When a request with a valid API Key is made", function() {
           expect(data.success).toBe(true);
           imp.getDevice(settings.validDeviceId, function(err, data) {
             expect(err).toBe(null);
-            expect(data.device.model_id).toBe(null);
-            expect(data.device.name).toBe(null);
 
             done();
           });
@@ -321,6 +362,7 @@ describe("When a request with a valid API Key is made", function() {
       });
     });
   });
+
 
   describe("to getModel", function() {
     describe("with a valid model_id", function() {
@@ -345,6 +387,143 @@ describe("When a request with a valid API Key is made", function() {
         });
       });
     });
+  });
+
+
+  describe("to restartModel", function() {
+    describe("with a valid model_id", function() {
+      it("it should return success", function(done) {
+        imp.restartModel(settings.validModelId, function(err, data) {
+          expect(err).toBe(null);
+
+          expect(data.success).toBe(true);
+
+          done();
+        });
+      });
+    });
+    describe("with an invalid model_id", function() {
+      it("it should return an error", function(done) {
+        imp.restartModel(settings.invalidModelId, function(err, data) {
+          expect(err).not.toBe(null);
+          expect(err.code).toBe("ModelNotFound");
+
+          done();
+        });
+      });
+    });
+  });
+
+
+  describe("to getModelRevisions", function() {
+    describe("with an invalid model_id", function() {
+      it("it should return an error", function(done) {
+        imp.getModelRevisions(settings.invalidModelId, null, function(err, data) {
+          expect(err).not.toBe(null);
+          expect(err.code).toBe("ModelNotFound");
+          done();
+        });
+      });
+    });
+
+    describe("with a valid model_id", function() {
+      it("should return an array of revisions", function(done) {
+        imp.getModelRevisions(settings.validModelId, { "build_min" : 0 }, function(err, data) {
+          expect(err).toBe(null);
+          expect(data.success).toBe(true);
+
+          expect(data.revisions).not.toBe(undefined);
+          expect(data.revisions[0].version).not.toBe(undefined);
+          expect(data.revisions[0].created_at).not.toBe(undefined);
+          // expect(data.revisions[0].marker).not.toBe(undefined);
+
+          done();
+        });
+      });
+    });
+  });
+
+  describe("to getModelRevision", function() {
+    describe("with an invalid model_id", function() {
+      it("it should return an error", function(done) {
+        imp.getModelRevision(settings.invalidModelId, 1, function(err, data) {
+          expect(err).not.toBe(null);
+          expect(err.code).toBe("ModelNotFound");
+          done();
+        });
+      });
+    });
+
+    describe("with a valid model_id", function() {
+      var lastBuild;
+
+      beforeEach(function(done) {
+        imp.getModelRevisions(settings.validModelId, null, function(err, data) {
+          lastBuild = data.revisions[0].version;
+          done();
+        });
+      });
+
+      describe("and an invalid revisionId", function() {
+        it("it should return an error", function(done) {
+
+          imp.getModelRevision(settings.validModelId, lastBuild + 1, function(err, data) {
+            expect(err).not.toBe(null);
+            expect(err.code).toBe("RevisionNotFound");
+            done();
+          });
+        });
+      });
+      describe("and a valid revisionId", function() {
+        it("should return the revision", function(done) {
+          imp.getModelRevision(settings.validModelId, lastBuild, function(err, data) {
+            expect(err).toBe(null);
+            expect(data.success).toBe(true);
+
+            expect(data.revision).not.toBe(undefined);
+            expect(data.revision.version).toBe(lastBuild);
+            expect(data.revision.created_at).not.toBe(undefined);
+            expect(data.revision.device_code).not.toBe(undefined);
+            expect(data.revision.agent_code).not.toBe(undefined);
+            expect(data.revision.release_notes).not.toBe(undefined);
+            // expect(data.revision.marker).not.toBe(undefined);
+
+            done();
+          });
+        });
+      });
+    });
+  });
+
+  describe("to createModelRevision", function() {
+    describe("with an invalid model_id", function() {
+      it("it should return an error", function(done) {
+        imp.createModelRevision(settings.invalidModelId, {}, function(err, data) {
+          expect(err).not.toBe(null);
+          expect(err.code).toBe("ModelNotFound");
+          done();
+        });
+      });
+    });
+
+    describe("with a valid model_id", function() {
+      var time = Date.now();
+      var model = {
+        "device_code": "server.log(\"Device Started at: "+time+"\");",
+        "agent_code": "server.log(\"Agent Started at: "+time+"\");",
+        "release_notes": "Test build created at " + time,
+        "marker": ""
+      };
+
+      it("it should create the revision", function(done) {
+        imp.createModelRevision(settings.validModelId, model, function(err, data) {
+          expect(err).toBe(null);
+          expect(data.success).toBe(true);
+          done();
+        });
+      });
+    });
+
   });
 });
 
