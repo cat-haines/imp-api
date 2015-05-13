@@ -280,80 +280,11 @@ describe("When the SDK processes a request", function() {
   });
 });
 
-describe("When an entity is requested", function() {
-  var imp;
-  var id = "123";
-  var collection = "collection";
-  var cb = function(err, data) {};
 
-  beforeEach(function() {
-    imp = new Imp();
-    spyOn(imp, "_req");
-  });
-
-  describe("With no ID", function() {
-    it("the callback should immediatly fire with an error", function(done) {
-
-      var expectedVerb = "VERB";
-      var expectedErr = { "errors": [ {"error": "InvalidParam", "message": "id cannot be null"}]}
-
-      imp.entityRequest(expectedVerb, collection, null, null, null, function(err, data) {
-        expect(err).not.toBe(null);
-        expect(err.code).toBe("InvalidParam");
-        expect(err.message_short).toBe("id cannot be null");
-        expect(err.message_full).toBe("id cannot be null");
-
-        expect(imp._req).not.toHaveBeenCalled();
-        done();
-      })
-    });
-  });
-
-  describe("With an ID and no parameters", function() {
-    it("it should make the request", function() {
-
-      var expectedVerb = "VERB";
-      var expectedPath = collection + "/" + id;
-
-      imp.entityRequest(expectedVerb, collection, id, null, null, cb);
-      expect(imp._req).toHaveBeenCalledWith(expectedVerb, expectedPath, null, null, cb);
-    });
-  });
-
-  describe("with and ID and invalid parameters", function() {
-    it("should make the request", function(done) {
-
-      var expectedError = { "code": "InvalidParam", "message_short": "Invalid Parameter: a", "message_full": "Invalid Parameter: a" };
-
-      imp.entityRequest("GET", collection, id, { "a": true }, { "b": true }, function(err, data) {
-        expect(err).not.toBe(null);
-        expect(err.code).toBe(expectedError.code);
-        expect(err.message_short).toBe(expectedError.message_short);
-        expect(err.message_full).toBe(expectedError.message_full);
-
-        done();
-      });
-    });
-  });
-
-  describe("with and ID and valid parameters", function() {
-    it("it should make the request with the options", function() {
-
-      var options = { "param1": "123", "param2": "abc" };
-      var validOptions = { "param1" : true, "param2": true };
-      var expectedPath = collection + "/" + id;
-      var expectedVerb = "VERB";
-
-      imp.entityRequest(expectedVerb, collection, id, options, validOptions, cb);
-      expect(imp._req).toHaveBeenCalledWith(expectedVerb, expectedPath, null, options, cb);
-    });
-  });
-});
-
-describe("When you request a collection", function() {
+describe("When a request is made", function() {
   var imp;
   var cb = function(err, data) {};
-  var collection = "collection";
+  var path = "path";
 
   beforeEach(function() {
     imp = new Imp();
@@ -363,8 +294,8 @@ describe("When you request a collection", function() {
   describe("with no parameters", function() {
     it("should make the request", function() {
 
-      imp.collectionRequest("GET", collection, null, {}, cb);
-      expect(imp._req).toHaveBeenCalledWith("GET", collection, null, {}, cb);
+      imp.apiRequest("GET", path, null, {}, cb);
+      expect(imp._req).toHaveBeenCalledWith("GET", path, null, {}, cb);
     });
   });
 
@@ -373,7 +304,7 @@ describe("When you request a collection", function() {
 
       var expectedError = { "code": "InvalidParam", "message_short": "Invalid Parameter: a", "message_full": "Invalid Parameter: a" };
 
-      imp.collectionRequest("GET", collection, { "a": true }, { "b": true }, function(err, data) {
+      imp.apiRequest("GET", path, { "a": true }, { "b": true }, function(err, data) {
         expect(err).not.toBe(null);
         expect(err.code).toBe(expectedError.code);
         expect(err.message_short).toBe(expectedError.message_short);
@@ -390,8 +321,8 @@ describe("When you request a collection", function() {
       var options = { "device_id" : "1", "mac_address": "1", "model_id": "1", "name": "1" };
       var validOptions = { "device_id" : true, "mac_address": true, "model_id": true, "name": true };
 
-      imp.collectionRequest("GET", collection, options, validOptions, cb);
-      expect(imp._req).toHaveBeenCalledWith("GET", collection, null, options, cb);
+      imp.apiRequest("GET", path, options, validOptions, cb);
+      expect(imp._req).toHaveBeenCalledWith("GET", path, null, options, cb);
     });
   });
 });
