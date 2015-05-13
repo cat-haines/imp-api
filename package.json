@@ -13,7 +13,10 @@
     "iot",
     "api"
   ],
-  "author": "Matt Haines",
+  "author": {
+    "name": "Matt Haines",
+    "email": "matt@electricimp.com"
+  },
   "license": "MIT",
   "scripts": {
     "test": "jasmine"
