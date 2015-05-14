@@ -1,6 +1,8 @@
 # imp.js
 
-A Javascript wrapper for [Electric Imp](http://electricimp.com)'s Developer Tools API (currently in closed beta).
+A Javascript wrapper for [Electric Imp](http://electricimp.com)'s Developer Tools API.
+
+**NOTE:** Electric Imp's Developer Tools API is currently in a private beta. This note will be removed when the API is ready for public consumption.
 
 # Installation
 
