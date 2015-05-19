@@ -391,7 +391,6 @@ describe("When a request with a valid API Key is made", function() {
     });
   });
 
-
   describe("to restartModel", function() {
     describe("with a valid model_id", function() {
       it("it should return success", function(done) {
