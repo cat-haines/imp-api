@@ -1,6 +1,7 @@
 var Imp = require("../../lib/imp");
 var settings = require("./test_params.json");
 
+return; // uncomment to run integration tests
 
 describe("When a request with an invalid API Key is made", function() {
   var imp;
