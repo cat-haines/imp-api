@@ -129,7 +129,7 @@ describe("When _req is called", function() {
       expect(imp.request.calls.mostRecent().args[0].method).toEqual(expectedVerb);
       expect(imp.request.calls.mostRecent().args[0].json).toEqual(true);
       expect(imp.request.calls.mostRecent().args[0].url).toEqual(expectedUrl);
-      expect(imp.request.calls.mostRecent().args[0].form).toEqual(expectedBody);
+      expect(imp.request.calls.mostRecent().args[0].qs).toEqual(expectedBody);
       expect(imp.request.calls.mostRecent().args[0].headers["User-agent"]).toEqual("imp.js");
       expect(imp.request.calls.mostRecent().args[0].headers["Content-type"]).toEqual("application/json");
       expect(imp.request.calls.mostRecent().args[0].headers["Authorization"]).toEqual(expectedAuth);
@@ -280,7 +280,6 @@ describe("When the SDK processes a request", function() {
   });
 });
 
-
 describe("When a request is made", function() {
   var imp;
   var cb = function(err, data) {};
@@ -326,4 +325,3 @@ describe("When a request is made", function() {
     });
   });
 });
-
