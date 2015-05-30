@@ -22,6 +22,8 @@ var imp = new Imp({
 });
 ```
 
+# Devices
+
 ## imp.getDevices(options, callback)
 
 Returns a list of devices associted to the account. You can pass a table with any of the following options to filter the list: ```device_id```, ```mac_address```, ```model_id```, ```name```.
@@ -87,6 +89,45 @@ imp.deleteDevice("<-- device_id -->", function(err, data) {
   console.log("Success!!");
 });
 ```
+
+# Device Logs
+
+## imp.getDeviceLogs(deviceId, options, callback)
+
+Returns up to the last 200 messages from a specified device and its agent. You can pass a table with any of the following options to filter the list: ```since``` (), ```type``` ().
+
+```javascript
+// Get agent messages
+imp.getDeviceLogs("<-- device_id -->", { "type": "message.agent" }, function(err, data) {
+  if (err) {
+    cons.log(err);
+    return;
+  }
+
+  for(var idx in data.logs) {
+    console.log(data.logs[idx].type + "\t" + data.logs[idx].message);
+  }
+});
+```
+
+## imp.streamDeviceLogs(deviceId, callback)
+
+Continuously streams logs from the specified device and its agent. Each time new logs appear, the callback will be invoked:
+
+```javascript
+imp.StreamDeviceLogs("<-- device_id -->", function(err, data) {
+  if (err) {
+    cons.log(err);
+    return;
+  }
+
+  for(var idx in data.logs) {
+    console.log(data.logs[idx].type + "\t" + data.logs[idx].message);
+  }
+});
+```
+
+# Models
 
 ## imp.getModels(options, callback)
 
@@ -166,6 +207,8 @@ imp.deleteModel("<-- model_id -->", function(err, data) {
 });
 ```
 
+# Model Revisions
+
 ## imp.getModelRevisions(modelId, options, callback)
 
 Returns a list of code revisions for the specified model. You can pass a table with any of the following options to filter the list: ```since```, ```until```, ```build_min```, ```build_max```.
@@ -228,35 +271,6 @@ imp.createModelRevision("<-- model_id -->", model, function(err, data) {
   });
 });
 ```
-
-# Tests
-
-To run the full test suite, you will first need to create ```/spec/integration/test_params.json``` which should have the following content:
-
-```javascript
-{
-  "apiKey" : "<-- Your API Key -->",
-  "invalidApiKey" : "abc123",
-
-  "invalidDeviceId" : "abc123",
-  "invalidDeviceName" : "zxydl",
-
-  "validDeviceId" : "<-- A deviceId from your account -->",
-  "validDeviceName": "<-- A device name from your account -->",
-
-  "invalidModelId" : "abc123",
-  "invalidModelName": "zxydl",
-
-  "validModelId" : "<-- A modelId from your account -->",
-  "validModelName" : "<-- A model name from your account -->",
-
-
-  "apiBase" : "api.electricimp.com"
-}
-```
-
-To run the test suite, run ```jasmine``` from the root folder of the project.
-
 
 # LICENSE
 
