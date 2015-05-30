@@ -98,7 +98,7 @@ Returns up to the last 200 messages from a specified device and its agent. You c
 
 ```javascript
 // Get agent messages
-imp.getDeviceLogs("<-- device_id -->", { "type": "message.agent" }, function(err, data) {
+imp.getDeviceLogs("<-- device_id -->", { "type": "agent.log" }, function(err, data) {
   if (err) {
     cons.log(err);
     return;
