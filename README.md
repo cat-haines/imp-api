@@ -104,9 +104,9 @@ imp.getDeviceLogs("<-- device_id -->", { "type": "agent.log" }, function(err, da
     return;
   }
 
-  for(var idx in data.logs) {
-    console.log(data.logs[idx].type + "\t" + data.logs[idx].message);
-  }
+  data.logs.forEach(function(log) {
+    console.log(log.timestamp + " " + log.type + "\t" + log.message);
+  });
 });
 ```
 
@@ -117,13 +117,13 @@ Continuously streams logs from the specified device and its agent. Each time new
 ```javascript
 imp.StreamDeviceLogs("<-- device_id -->", function(err, data) {
   if (err) {
-    cons.log(err);
+    console.log(err);
     return;
   }
 
-  for(var idx in data.logs) {
-    console.log(data.logs[idx].type + "\t" + data.logs[idx].message);
-  }
+  data.logs.forEach(function(log) {
+    console.log(log.timestamp + " " + log.type + "\t" + log.message);
+  });
 });
 ```
 
