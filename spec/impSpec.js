@@ -5,7 +5,7 @@ describe("When you initialize a client", function() {
     it("the client should use the default settings", function() {
       var expectedApiKey = null;
       var expectedApiBase = "api.electricimp.com";
-      var expectedApiVersion = "v4";
+      var expectedApiVersion = "/v4";
 
       var imp = new Imp();
 
@@ -19,7 +19,7 @@ describe("When you initialize a client", function() {
     it("the client should ignore the settings parameter", function() {
       var expectedApiKey = null;
       var expectedApiBase = "api.electricimp.com";
-      var expectedApiVersion = "v4";
+      var expectedApiVersion = "/v4";
 
       var imp = new Imp("garbage");
 
@@ -33,7 +33,7 @@ describe("When you initialize a client", function() {
     it("the client should use the specified settings", function() {
       var expectedApiKey = "myApiKey";
       var expectedApiBase = "myUri";
-      var expectedApiVersion = "myVersion";
+      var expectedApiVersion = "/myVersion";
 
       var imp = new Imp({
         "apiKey": expectedApiKey,
@@ -51,8 +51,8 @@ describe("When you initialize a client", function() {
 describe("When you build a URL", function() {
   it("the client use the specified apiBase and version", function() {
     var testBase = "test-api.electricimp.com";
-    var testVersion = "test-version";
-    var testPath = "test-path";
+    var testVersion = "/test-version";
+    var testPath = "/test-path";
 
     var expectedUrl = "https://test-api.electricimp.com/test-version/test-path";
 
@@ -116,7 +116,7 @@ describe("When _req is called", function() {
   describe("with a GET request", function() {
     it("options should be properly built, and form should be set to body", function() {
       var expectedVerb = "GET";
-      var expectedUrl = "some-path";
+      var expectedUrl = "/some-path";
       var expectedHeaders = { "test-key": "test", "test-key1": "test1" };
       var expectedBody = { "foo": "bar "};
       var expectedAuth = "Basic " + new Buffer(apiKey).toString('base64');
@@ -125,7 +125,6 @@ describe("When _req is called", function() {
       imp._req(expectedVerb, expectedUrl, expectedHeaders, expectedBody, cb);
 
       // Make sure options was populated properly
-      expect(imp._buildUrl).toHaveBeenCalledWith(expectedUrl);
       expect(imp.request.calls.mostRecent().args[0].method).toEqual(expectedVerb);
       expect(imp.request.calls.mostRecent().args[0].json).toEqual(true);
       expect(imp.request.calls.mostRecent().args[0].url).toEqual(expectedUrl);
@@ -142,7 +141,7 @@ describe("When _req is called", function() {
   describe("with a non-GET request", function() {
     it("options should be properly built, and body should be set to body", function() {
       var expectedVerb = "POST";
-      var expectedUrl = "some-path";
+      var expectedUrl = "/some-path";
       var expectedHeaders = { "test-key": "test", "test-key1": "test1" };
       var expectedBody = { "foo": "bar "};
       var expectedAuth = "Basic " + new Buffer(apiKey).toString('base64');
@@ -150,7 +149,6 @@ describe("When _req is called", function() {
       imp._req(expectedVerb, expectedUrl, expectedHeaders, expectedBody, cb);
 
       // Make sure options was populated properly
-      expect(imp._buildUrl).toHaveBeenCalledWith(expectedUrl);
       expect(imp.request.calls.mostRecent().args[0].method).toEqual(expectedVerb);
       expect(imp.request.calls.mostRecent().args[0].json).toEqual(true);
       expect(imp.request.calls.mostRecent().args[0].url).toEqual(expectedUrl);
