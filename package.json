@@ -1,7 +1,7 @@
 {
   "name": "imp-api",
   "version": "0.2.6",
-  "description": "Javascript wrapper for the Electric Imp Developer Tools API",
+  "description": "Javascript wrapper for the Electric Imp Build API",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -11,7 +11,8 @@
     "electricimp",
     "imp",
     "iot",
-    "api"
+    "api",
+    "build"
   ],
   "author": {
     "name": "Matt Haines",

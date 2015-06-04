@@ -1,8 +1,8 @@
-# imp.js
+# Imp Build
 
-A Javascript wrapper for [Electric Imp](http://electricimp.com)'s Developer Tools API.
+A Javascript wrapper for the [Electric Imp Build API](http://electricimp.com/docs/buildapi).
 
-**NOTE:** Electric Imp's Developer Tools API is currently in a private beta. This note will be removed when the API is ready for public consumption.
+**NOTE:** Electric Imp's Build API is currently in a closed beta. This note will be removed when the API is ready for public consumption.
 
 # Installation
 
@@ -15,7 +15,7 @@ npm install imp-api
 The imp object *must* be instantiated with an apiKey - you can optionally pass an apiBase and apiVersion parameter to overload the defaults.
 
 ```javascript
-var Imp = require("imp");
+var Imp = require("imp-api");
 
 var imp = new Imp({
   "apiKey": "<-- YOUR API KEY -->"
