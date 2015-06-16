@@ -4,7 +4,7 @@ describe("When you initialize a client", function() {
   describe("and you don't specify any settings", function() {
     it("the client should use the default settings", function() {
       var expectedApiKey = null;
-      var expectedApiBase = "api.electricimp.com";
+      var expectedApiBase = "build.electricimp.com";
       var expectedApiVersion = "/v4";
 
       var imp = new Imp();
@@ -18,7 +18,7 @@ describe("When you initialize a client", function() {
   describe("and you don't pass a table parameter for settings", function() {
     it("the client should ignore the settings parameter", function() {
       var expectedApiKey = null;
-      var expectedApiBase = "api.electricimp.com";
+      var expectedApiBase = "build.electricimp.com";
       var expectedApiVersion = "/v4";
 
       var imp = new Imp("garbage");
