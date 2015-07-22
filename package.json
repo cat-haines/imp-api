@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/beardedinventor/imp-api.git"
+    "url": "https://github.com/matt-haines/imp-api.git"
   },
   "keywords": [
     "electricimp",
@@ -23,9 +23,9 @@
     "test": "jasmine"
   },
   "bugs": {
-    "url": "https://github.com/beardedinventor/imp-api/issues"
+    "url": "https://github.com/matt-haines/imp-api/issues"
   },
-  "homepage": "https://github.com/beardedinventor/imp-api",
+  "homepage": "https://github.com/matt-haines/imp-api",
   "dependencies": {
     "request": "^2.55.0"
   },
