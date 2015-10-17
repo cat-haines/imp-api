@@ -16,7 +16,8 @@
   ],
   "author": {
     "name": "Cat Haines",
-    "email": "haines2m@gmail.com",
+    "email": "haines2m@gmail.com"
+  },
   "license": "MIT",
   "scripts": {
     "test": "jasmine"
