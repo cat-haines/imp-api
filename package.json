@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/matt-haines/imp-api.git"
+    "url": "https://github.com/cat-haines/imp-api.git"
   },
   "keywords": [
     "electricimp",
@@ -15,17 +15,16 @@
     "build"
   ],
   "author": {
-    "name": "Matt Haines",
-    "email": "matt@electricimp.com"
-  },
+    "name": "Cat Haines",
+    "email": "haines2m@gmail.com"
   "license": "MIT",
   "scripts": {
     "test": "jasmine"
   },
   "bugs": {
-    "url": "https://github.com/matt-haines/imp-api/issues"
+    "url": "https://github.com/cat-haines/imp-api/issues"
   },
-  "homepage": "https://github.com/matt-haines/imp-api",
+  "homepage": "https://github.com/cat-haines/imp-api",
   "dependencies": {
     "request": "^2.55.0"
   },
